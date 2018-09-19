@@ -9,28 +9,110 @@
 import XCTest
 
 class PayconiqUITests: XCTestCase {
-        
+    
+    private let _app = XCUIApplication()
+    
+    private let _alertButtonTitle = "Present alert"
+    
+    private let _actionSheetTitle = "Present action sheet"
+    
+    private let _title = "Attention"
+    
+    private let _message = "Press a button"
+    
+    private let _ok = "Ok"
+    
+    private let _cancel = "Cancel"
+    
+    private let _pressedOk = "You pressed: Ok"
+    
+    private let _pressedCancel = "You pressed: Cancel"
+    
+    
     override func setUp() {
         super.setUp()
         
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testDisplayingAlert() {
+        
+        _app.buttons[_alertButtonTitle].tap()
+        XCTAssertNotNil(_app.alerts)
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testAlertPressedOkButton() {
+        
+        _app.buttons[_alertButtonTitle].tap()
+        
+        let alert = _app.alerts
+        XCTAssertNotNil(alert)
+        
+        // title
+        XCTAssert(alert.element.staticTexts[_title].exists)
+        
+        // message
+        XCTAssert(alert.element.staticTexts[_message].exists)
+        
+        alert.buttons[_ok].tap()
+        XCTAssert(_app.alerts.staticTexts[_pressedOk].exists)
     }
     
+    func testAlertPressedCancelButton() {
+        
+        _app.buttons[_alertButtonTitle].tap()
+        
+        let alert = _app.alerts
+        XCTAssertNotNil(alert)
+        
+        // title
+        XCTAssert(alert.element.staticTexts[_title].exists)
+        
+        // message
+        XCTAssert(alert.element.staticTexts[_message].exists)
+        
+        alert.buttons[_cancel].tap()
+        XCTAssert(_app.alerts.staticTexts[_pressedCancel].exists)
+    }
+    
+    func testDisplayingActionSheet() {
+        
+        _app.buttons[_actionSheetTitle].tap()
+        XCTAssertNotNil(_app.alerts)
+    }
+    
+    func testActionSheetPressedOkButton() {
+        
+        _app.buttons[_actionSheetTitle].tap()
+        
+        let sheet = _app.sheets
+        XCTAssertNotNil(sheet)
+        
+        // title
+        XCTAssert(sheet.element.staticTexts[_title].exists)
+        
+        // message
+        XCTAssert(sheet.element.staticTexts[_message].exists)
+        
+        sheet.buttons[_ok].tap()
+        XCTAssert(_app.alerts.staticTexts[_pressedOk].exists)
+    }
+    
+    func testActionSheetPressedCancelButton() {
+        
+        _app.buttons[_actionSheetTitle].tap()
+        
+        let sheet = _app.sheets
+        XCTAssertNotNil(sheet)
+        
+        // title
+        XCTAssert(sheet.element.staticTexts[_title].exists)
+        
+        // message
+        XCTAssert(sheet.element.staticTexts[_message].exists)
+        
+        sheet.buttons[_cancel].tap()
+        XCTAssert(_app.alerts.staticTexts[_pressedCancel].exists)
+    }
 }
