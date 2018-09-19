@@ -33,15 +33,17 @@ class DestroyableString {
         
         var time = after
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
+            
+            guard let sself = self else { return }
             
             time -= 1
-            self.onTimeLeft?(time)
+            sself.onTimeLeft?(time)
             
             if time == 0 {
                 
-                self.value = nil
-                self.onDestroy?()
+                sself.value = nil
+                sself.onDestroy?()
                 timer.invalidate()
             }
         })
