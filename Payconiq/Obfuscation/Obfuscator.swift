@@ -30,7 +30,6 @@ class Obfuscator: Any {
      that was used when the Obfuscator was initialized.
      
      - parameter string: the string to obfuscate
-     
      - returns: the obfuscated string in a byte array
      */
     func bytesByObfuscatingString(string: String) -> [UInt8] {
@@ -60,7 +59,6 @@ class Obfuscator: Any {
      used to encrypt it in the first place.
      
      - parameter key: the byte array to reveal
-     
      - returns: the original string
      */
     func reveal(key: [UInt8]) -> String {

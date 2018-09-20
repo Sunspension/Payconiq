@@ -29,6 +29,7 @@ class DestroyableString {
     }
     
     /// The self-destruct mechanism.
+    /// - parameter after: During that period of time the string value will be exist.
     private func destroyValue(after: TimeInterval) {
         
         var time = after
